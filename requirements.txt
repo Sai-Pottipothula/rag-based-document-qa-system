@@ -1,0 +1,46 @@
+# Core
+python-dotenv
+pydantic
+
+# LLM
+langchain
+langchain-core
+langchain-openai
+langchain-community
+langchain-text-splitters
+
+# OpenAI
+openai
+tiktoken
+
+# Parsing
+beautifulsoup4
+trafilatura
+pypdf
+
+# Vector Databases
+qdrant-client
+pgvector
+psycopg2-binary
+
+# Retrieval
+rank-bm25
+
+# Reranking
+cohere
+
+# API
+fastapi
+uvicorn
+
+# UI
+streamlit
+requests
+
+# Utilities
+numpy
+pandas
+tqdm
+
+# Optional Logging
+rich
