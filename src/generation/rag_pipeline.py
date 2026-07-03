@@ -4,6 +4,7 @@ from src.retrieval.hybrid_search import hybrid_search
 from src.models.answer import Answer
 from src.models.rerank_response import RerankResponse
 from src.retrieval.rerank import rerank
+from langsmith import traceable
 
 load_dotenv()
 
@@ -18,7 +19,7 @@ def create_llm() -> ChatOpenAI:
         temperature=0,
     )
 
-
+@traceable(name="Build Context")
 def build_context(
     rerank_result: RerankResponse,
 ) -> str:
@@ -40,7 +41,7 @@ Chunk ID: {chunk.chunk_id}
 
     return "\n\n".join(context)
 
-
+@traceable(name="Build Prompt")
 def build_prompt(
     question: str,
     context: str,
@@ -70,7 +71,7 @@ Question:
 {question}
 """
 
-
+@traceable(name="Hybrid RAG Pipeline")
 def generate_answer(
     question: str,
     use_reranker: bool = True,
@@ -93,7 +94,11 @@ def generate_answer(
 
     llm = create_llm().with_structured_output(Answer)
 
-    return llm.invoke(prompt)
+    answer = llm.invoke(prompt)
+
+    answer.retrieved_chunks = retrieval_result.chunks
+
+    return answer
 
 
 def main() -> None:
@@ -108,10 +113,9 @@ def main() -> None:
     print("\nCITATIONS\n")
 
     for citation in answer.citations:
-        print(
-            f"{citation.doc_id} | Chunk {citation.chunk_id}"
-        )
+        print(f"{citation.doc_id} | Chunk {citation.chunk_id}")
 
 
 if __name__ == "__main__":
     main()
+

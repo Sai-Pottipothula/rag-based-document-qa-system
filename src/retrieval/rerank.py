@@ -39,10 +39,7 @@ def rerank(
         final_k=retrieve_k,
     )
 
-    documents = [
-        chunk.text
-        for chunk in retrieval_result.chunks
-    ]
+    documents = [chunk.text for chunk in retrieval_result.chunks]
 
     reranker = create_reranker()
 

@@ -88,5 +88,6 @@ def main() -> None:
     print(f"Created {len(chunks)} chunks")
     print("Saved chunks.json")
 
+
 if __name__ == "__main__":
     main()

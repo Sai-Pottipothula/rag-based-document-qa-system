@@ -20,10 +20,7 @@ def save_json(data: list[BaseModel], path: Path) -> None:
         # Remove invalid unicode characters
         for key, value in obj.items():
             if isinstance(value, str):
-                obj[key] = (
-                    value.encode("utf-8", errors="ignore")
-                    .decode("utf-8")
-                )
+                obj[key] = value.encode("utf-8", errors="ignore").decode("utf-8")
 
         cleaned.append(obj)
 

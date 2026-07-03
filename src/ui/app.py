@@ -19,12 +19,9 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-question = st.chat_input(
-    "Ask a question about your documents..."
-)
+question = st.chat_input("Ask a question about your documents...")
 
 if question:
-
     st.session_state.messages.append(
         {
             "role": "user",
@@ -36,7 +33,6 @@ if question:
         st.markdown(question)
 
     with st.spinner("Searching documents..."):
-
         try:
             response = requests.post(
                 API_URL,
@@ -50,10 +46,7 @@ if question:
             result = response.json()
 
         except requests.exceptions.RequestException as error:
-
-            st.error(
-                f"Unable to connect to the API.\n\n{error}"
-            )
+            st.error(f"Unable to connect to the API.\n\n{error}")
 
             st.stop()
 
@@ -61,16 +54,10 @@ if question:
 
     citations = result["citations"]
 
-    assistant_message = (
-        f"{answer}\n\n"
-        f"### Citations\n"
-    )
+    assistant_message = f"{answer}\n\n### Citations\n"
 
     for citation in citations:
-        assistant_message += (
-            f"- {citation['doc_id']} "
-            f"(Chunk {citation['chunk_id']})\n"
-        )
+        assistant_message += f"- {citation['doc_id']} (Chunk {citation['chunk_id']})\n"
 
     st.session_state.messages.append(
         {
@@ -80,13 +67,9 @@ if question:
     )
 
     with st.chat_message("assistant"):
-
         st.markdown(answer)
 
         st.markdown("### 📚 Sources")
 
         for citation in citations:
-            st.write(
-                f"📄 **{citation['doc_id']}**"
-                f" | Chunk {citation['chunk_id']}"
-            )
+            st.write(f"📄 **{citation['doc_id']}** | Chunk {citation['chunk_id']}")

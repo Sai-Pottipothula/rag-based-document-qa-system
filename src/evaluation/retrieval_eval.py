@@ -61,7 +61,6 @@ def evaluate(
     total_time = 0.0
 
     for example in examples:
-
         response = hybrid_search(
             query=example["question"],
             retrieve_k=20,
@@ -71,12 +70,7 @@ def evaluate(
 
         total_time += response.execution_time
 
-        retrieved_docs = list(
-            dict.fromkeys(
-                chunk.doc_id
-                for chunk in response.chunks
-            )
-        )
+        retrieved_docs = list(dict.fromkeys(chunk.doc_id for chunk in response.chunks))
 
         expected_doc = example["expected_document"]
 
@@ -124,7 +118,6 @@ def evaluate(
 
 
 def main() -> None:
-
     metrics = evaluate("rag_documents")
 
     print("\n========== RETRIEVAL EVALUATION ==========\n")

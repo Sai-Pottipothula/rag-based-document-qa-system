@@ -71,5 +71,6 @@ def main() -> None:
     print(f"Embeddings Made  : {len(embedded_chunks)}")
     print("Saved embedded_chunks.json")
 
+
 if __name__ == "__main__":
     main()

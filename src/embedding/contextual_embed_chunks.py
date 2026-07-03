@@ -50,9 +50,7 @@ def embed_chunk(
 
     contextual_text = build_contextual_text(chunk)
 
-    vector = embedding_model.embed_query(
-        contextual_text
-    )
+    vector = embedding_model.embed_query(contextual_text)
 
     return EmbeddedChunk(
         doc_id=chunk.doc_id,
@@ -89,9 +87,7 @@ def embed_chunks(
 
 
 def main() -> None:
-    documents = load_documents(
-        Path("data/raw")
-    )
+    documents = load_documents(Path("data/raw"))
 
     chunks = chunk_documents(documents)
 
@@ -99,9 +95,7 @@ def main() -> None:
 
     save_json(
         embedded_chunks,
-        Path(
-            "data/processed/contextual_embedded_chunks.json"
-        ),
+        Path("data/processed/contextual_embedded_chunks.json"),
     )
 
     print()
@@ -112,9 +106,7 @@ def main() -> None:
 
     print()
 
-    print(
-        "Saved contextual_embedded_chunks.json"
-    )
+    print("Saved contextual_embedded_chunks.json")
 
 
 if __name__ == "__main__":

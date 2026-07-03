@@ -58,7 +58,7 @@ def hybrid_search(
     query: str,
     retrieve_k: int = 20,
     final_k: int = 10,
-    collection_name: str = COLLECTION_NAME, 
+    collection_name: str = COLLECTION_NAME,
 ) -> RetrievalResponse:
     """
     Perform Hybrid Retrieval using BM25 + Vector Search + RRF.

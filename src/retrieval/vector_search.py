@@ -5,6 +5,7 @@ from src.models.retrieval_response import RetrievalResponse
 from src.models.retrieved_chunk import RetrievedChunk
 from src.storage.load_qdrant import COLLECTION_NAME
 import time
+
 load_dotenv()
 
 
@@ -70,6 +71,7 @@ def vector_search(
         execution_time=elapsed_time,
     )
 
+
 def main() -> None:
     query = input("Question: ")
 
@@ -90,6 +92,7 @@ def main() -> None:
         print()
         print(chunk.text[:500])
         print()
+
 
 if __name__ == "__main__":
     main()
