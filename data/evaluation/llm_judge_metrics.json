@@ -1,0 +1,49 @@
+{
+    "questions": 30,
+    "average_helpfulness": 3.3333333333333335,
+    "average_faithfulness": 3.966666666666667,
+    "average_harm": 0,
+    "overall_score": 3.7666666666666666,
+    "lowest_examples": [
+        {
+            "question": "Compare BM25 and vector search.",
+            "overall": 2.6666666666666665,
+            "helpfulness": 0,
+            "faithfulness": 4,
+            "harm": 0,
+            "justification": "The answer 'I don't know.' is not helpful at all, as it does not attempt to answer the question or use the provided context, which contains ample information about vector search and embeddings. However, it is fully faithful in that it does not introduce any incorrect information or hallucinations. There is no harmful content present."
+        },
+        {
+            "question": "Why would vector search fail?",
+            "overall": 2.6666666666666665,
+            "helpfulness": 0,
+            "faithfulness": 4,
+            "harm": 0,
+            "justification": "The answer 'I don't know.' is not helpful as it does not attempt to answer the question or provide any information. However, it is fully faithful in that it does not introduce any incorrect or misleading information. There is no harmful content present."
+        },
+        {
+            "question": "What happens if no relevant context is retrieved?",
+            "overall": 3.0,
+            "helpfulness": 1,
+            "faithfulness": 4,
+            "harm": 0,
+            "justification": "The answer 'I don't know.' is fully faithful, as it does not introduce any incorrect information. However, it is minimally helpful because it does not address the question of what happens if no relevant context is retrieved in a RAG system. A more helpful answer would explain that if no relevant context is retrieved, the LLM will have to generate a response based only on its pre-trained knowledge, which may result in less accurate or less relevant answers."
+        },
+        {
+            "question": "What metadata is stored with chunks?",
+            "overall": 3.3333333333333335,
+            "helpfulness": 3,
+            "faithfulness": 3,
+            "harm": 0,
+            "justification": "The answer correctly states that indexes can store a variety of metadata about data chunks, including custom key-value pairs such as author, version, and server information, which is supported by the retrieved context. However, it could be more specific by mentioning other common metadata fields (e.g., tags, category, documentation, etc.) as shown in the context. The answer is accurate and relevant, but lacks some detail for maximum helpfulness."
+        },
+        {
+            "question": "How does a retriever work?",
+            "overall": 3.6666666666666665,
+            "helpfulness": 3,
+            "faithfulness": 4,
+            "harm": 0,
+            "justification": "The answer accurately describes the main function of a retriever, its role in fetching relevant context, and mentions its integration with indexes, routers, and node postprocessors, which aligns well with the retrieved context. It is faithful to the source material and contains no harmful content. However, it could be more helpful by providing a more concrete example or a step-by-step explanation of how a retriever works in practice, which would improve clarity for users unfamiliar with the concept."
+        }
+    ]
+}

@@ -3,13 +3,16 @@ import time
 
 import cohere
 from dotenv import load_dotenv
+from langsmith import traceable
 
 from src.models.rerank_response import RerankResponse
 from src.models.reranked_chunk import RerankedChunk
 from src.models.retrieval_response import RetrievalResponse
-from src.retrieval.hybrid_search import hybrid_search
+from src.observability.tracing import trace_reranker
 
 load_dotenv()
+
+RERANK_MODEL = "rerank-v3.5"
 
 
 def create_reranker() -> cohere.Client:
@@ -22,9 +25,10 @@ def create_reranker() -> cohere.Client:
     )
 
 
+@traceable(name="Cohere Rerank")
 def rerank(
     query: str,
-    retrieve_k: int = 20,
+    retrieval_result: RetrievalResponse,
     top_k: int = 6,
 ) -> RerankResponse:
     """
@@ -33,18 +37,12 @@ def rerank(
 
     start_time = time.perf_counter()
 
-    retrieval_result: RetrievalResponse = hybrid_search(
-        query=query,
-        retrieve_k=retrieve_k,
-        final_k=retrieve_k,
-    )
-
     documents = [chunk.text for chunk in retrieval_result.chunks]
 
     reranker = create_reranker()
 
     response = reranker.rerank(
-        model="rerank-v3.5",
+        model=RERANK_MODEL,
         query=query,
         documents=documents,
         top_n=top_k,
@@ -67,10 +65,21 @@ def rerank(
 
     elapsed_time = time.perf_counter() - start_time
 
+    trace_reranker(
+        model=RERANK_MODEL,
+        input_chunks=len(retrieval_result.chunks),
+        output_chunks=len(reranked_chunks),
+        rerank_scores=[
+            round(chunk.rerank_score, 4)
+            for chunk in reranked_chunks
+        ],
+        latency=elapsed_time,
+    )
+
     return RerankResponse(
         query=query,
         chunks=reranked_chunks,
-        reranker="rerank-v3.5",
+        reranker=RERANK_MODEL,
         top_k=top_k,
         execution_time=elapsed_time,
     )

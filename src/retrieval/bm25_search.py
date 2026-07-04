@@ -1,6 +1,7 @@
 import time
 from pathlib import Path
 
+from langsmith import traceable
 from rank_bm25 import BM25Okapi
 
 from src.models.chunk import Chunk
@@ -26,6 +27,13 @@ def create_bm25() -> tuple[BM25Okapi, list[Chunk]]:
     return bm25, chunks
 
 
+@traceable(
+    name="BM25 Search",
+    metadata={
+        "stage": "retrieval",
+        "retriever": "bm25",
+    },
+)
 def bm25_search(
     query: str,
     limit: int = 10,
@@ -70,6 +78,8 @@ def bm25_search(
         retrieval_method="bm25",
         total_candidates=len(retrieved_chunks),
         execution_time=elapsed_time,
+        bm25_candidates=len(retrieved_chunks),
+        vector_candidates=0,
     )
 
 

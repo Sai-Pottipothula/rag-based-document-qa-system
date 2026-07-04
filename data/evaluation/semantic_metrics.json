@@ -1,0 +1,30 @@
+{
+    "questions": 30,
+    "average_similarity": 0.557530633695896,
+    "highest_similarity": 0.9191175673750585,
+    "lowest_similarity": 0.07708513317901994,
+    "median_similarity": 0.5702642130585087,
+    "pass_rate": 0.16666666666666666,
+    "lowest_examples": [
+        {
+            "question": "Why would vector search fail?",
+            "similarity": 0.07708513317901994
+        },
+        {
+            "question": "What happens if no relevant context is retrieved?",
+            "similarity": 0.11535169063328707
+        },
+        {
+            "question": "Compare BM25 and vector search.",
+            "similarity": 0.11535186037563262
+        },
+        {
+            "question": "What metadata is stored with chunks?",
+            "similarity": 0.1251583198698642
+        },
+        {
+            "question": "Compare documents and nodes in LlamaIndex.",
+            "similarity": 0.3092486641564924
+        }
+    ]
+}

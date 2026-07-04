@@ -1,5 +1,11 @@
+import json
+from pathlib import Path
+
+from langsmith import traceable
+
 from src.evaluation.utils import load_eval_set
 from src.generation.rag_pipeline import generate_answer
+from src.observability.tracing import trace_evaluation
 
 
 def has_answer(answer: str) -> bool:
@@ -50,7 +56,8 @@ def minimum_answer_length(
     return len(answer.strip()) >= minimum_length
 
 
-def evaluate() -> None:
+@traceable(name="Deterministic Evaluation")
+def evaluate() -> dict:
     """
     Run deterministic evaluation.
     """
@@ -83,30 +90,6 @@ def evaluate() -> None:
 
     total = len(examples)
 
-    print("\n========== DETERMINISTIC EVALUATION ==========\n")
-
-    print(f"Questions                  : {total}")
-
-    print(
-        f"Answer Present             : "
-        f"{answer_pass}/{total}"
-    )
-
-    print(
-        f"Citation Present           : "
-        f"{citation_pass}/{total}"
-    )
-
-    print(
-        f"Valid Citation Format      : "
-        f"{citation_format_pass}/{total}"
-    )
-
-    print(
-        f"Minimum Answer Length      : "
-        f"{length_pass}/{total}"
-    )
-
     overall = (
         answer_pass
         + citation_pass
@@ -116,14 +99,67 @@ def evaluate() -> None:
 
     possible = total * 4
 
-    print(
-        f"\nOverall Pass Rate          : "
-        f"{overall / possible:.1%}"
+    pass_rate = overall / possible
+
+    metrics = {
+        "questions": total,
+        "answer_present": answer_pass,
+        "citation_present": citation_pass,
+        "valid_citation_format": citation_format_pass,
+        "minimum_answer_length": length_pass,
+        "overall_pass_rate": pass_rate,
+    }
+
+    trace_evaluation(
+        pass_rate=pass_rate,
     )
+
+    return metrics
 
 
 def main() -> None:
-    evaluate()
+
+    metrics = evaluate()
+
+    output_path = Path(
+        "data/evaluation/deterministic_metrics.json"
+    )
+
+    output_path.write_text(
+        json.dumps(metrics, indent=4),
+        encoding="utf-8",
+    )
+
+    print("\n========== DETERMINISTIC EVALUATION ==========\n")
+
+    print(f"Questions                  : {metrics['questions']}")
+
+    print(
+        f"Answer Present             : "
+        f"{metrics['answer_present']}/{metrics['questions']}"
+    )
+
+    print(
+        f"Citation Present           : "
+        f"{metrics['citation_present']}/{metrics['questions']}"
+    )
+
+    print(
+        f"Valid Citation Format      : "
+        f"{metrics['valid_citation_format']}/{metrics['questions']}"
+    )
+
+    print(
+        f"Minimum Answer Length      : "
+        f"{metrics['minimum_answer_length']}/{metrics['questions']}"
+    )
+
+    print(
+        f"\nOverall Pass Rate          : "
+        f"{metrics['overall_pass_rate']:.1%}"
+    )
+
+    print(f"\nMetrics saved to           : {output_path}")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,512 @@
+[
+    {
+        "question": "What is a retriever?",
+        "prompt_v1": {
+            "answer": "A retriever is responsible for fetching the most relevant context given a user query (or chat message). It can be built on top of indexes, but can also be defined independently. Retrievers are a key building block in query engines (and Chat Engines) for retrieving relevant context.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 2.227662249992136,
+            "similarity": 0.8990343330996547
+        },
+        "prompt_v2": {
+            "answer": "A retriever is responsible for fetching the most relevant context given a user query (or chat message). It can be built on top of indexes or defined independently and is a key building block in query engines and chat engines for retrieving relevant context. Retrievers help ensure that the data provided to the LLM is relevant to the user's query, improving the quality of responses. You can select and configure retrievers based on your needs, and they can be used with both high-level and low-level APIs for more granular control.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 2.2570855829981156,
+            "similarity": 0.8714919512929162
+        }
+    },
+    {
+        "question": "How does a retriever work?",
+        "prompt_v1": {
+            "answer": "A retriever is responsible for fetching the most relevant context given a user query (or chat message). It can be built on top of indexes, but can also be defined independently. Retrievers are key building blocks in query engines and chat engines for retrieving relevant context. The retriever defines how to efficiently retrieve relevant context from an index when given a query, and the retrieval strategy is crucial for the relevancy and efficiency of the data retrieved. You can select different retriever classes depending on the index and configure them as needed. Additionally, routers can determine which retriever to use, and node postprocessors can further process the retrieved nodes by applying transformations, filtering, or re-ranking logic.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 3.4381994169962127,
+            "similarity": 0.856992249549257
+        },
+        "prompt_v2": {
+            "answer": "- A retriever is responsible for fetching the most relevant context given a user query or chat message.\n- It can be built on top of indexes or defined independently.\n- Retrievers are key building blocks in query engines and chat engines for retrieving relevant context.\n- You can select different retriever classes based on the type of index and configure them with specific parameters.\n- The retrieval strategy impacts both the relevancy of the data retrieved and the efficiency of the process.\n- Retrievers can be used in high-level APIs or with low-level composition APIs for more granular control.\n- In some frameworks, you can create a retriever from a vector database and use it in a retrieval-based QA chain.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 4.7088865830155555,
+            "similarity": 0.8517820266791947
+        }
+    },
+    {
+        "question": "What is Retrieval-Augmented Generation (RAG)?",
+        "prompt_v1": {
+            "answer": "Retrieval-Augmented Generation (RAG) is a technique that addresses the limitation of large language models (LLMs) not being trained on your specific data. RAG works by adding your data to the data LLMs already have access to. In RAG, your data is loaded and prepared for queries (indexed), and user queries act on this index to filter your data down to the most relevant context. This context, along with the user query, is then sent to the LLM with a prompt, and the LLM generates a response. RAG is commonly used in applications like chatbots, agents, and other systems that need to incorporate proprietary or external data into LLM responses.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 3.3368547499994747,
+            "similarity": 0.8930275598677159
+        },
+        "prompt_v2": {
+            "answer": "- Retrieval-Augmented Generation (RAG) is a technique that enhances language model outputs by adding relevant external data to the model's input.\n- RAG involves loading your data, indexing it (often as vector embeddings), and then querying this index to retrieve the most relevant context for a user's query.\n- The retrieved context is combined with the user's query and sent to the language model, which generates a response based on both the query and the additional context.\n- RAG is commonly used in applications like chatbots and agents to provide responses grounded in proprietary or up-to-date data not present in the model's original training set.\n- The main stages of RAG are: Loading, Indexing, Storing, Querying, and Evaluation.[{\"doc_id\":\"Introduction to RAG _ Developer Documentation.html\",\"chunk_id\":305},{\"doc_id\":\"Introduction to RAG _ Developer Documentation.html\",\"chunk_id\":306},{\"doc_id\":\"Introduction to RAG _ Developer Documentation.html\",\"chunk_id\":307},{\"doc_id\":\"Prompt engineering _ OpenAI API.html\",\"chunk_id\":297}]",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 6.2825824589817785,
+            "similarity": 0.8058916170929589
+        }
+    },
+    {
+        "question": "What is a vector store?",
+        "prompt_v1": {
+            "answer": "A vector store is a specialized database that stores vector embeddings, which are numerical representations of data generated by large language models (LLMs). The vector store allows for efficient retrieval of data by comparing the similarity between the embedding of a query and the stored embeddings, making it easy to find relevant information based on numerical similarity.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 1.7370552089996636,
+            "similarity": 0.36110353439386095
+        },
+        "prompt_v2": {
+            "answer": "A vector store is a specialized database designed to store vector embeddings, which are numerical representations of data generated by language models. It enables efficient retrieval of data by comparing the similarity between query embeddings and stored embeddings. Vector stores can also store metadata about the data they contain.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 1.6398330839874689,
+            "similarity": 0.3134236367670233
+        }
+    },
+    {
+        "question": "What are embeddings?",
+        "prompt_v1": {
+            "answer": "Embeddings are a way to represent the meaning of texts, images, or information as a list (vector) of numbers. The distance or similarity between two embeddings can be calculated to determine how related two pieces of information are. Embeddings are commonly used for tasks such as semantic search, clustering, classification, recommendations, anomaly detection, and diversity measurement. In machine learning, embeddings can serve as feature encoders for free text or categorical variables, improving model performance when relevant inputs are text-based.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 4.069142958003795,
+            "similarity": 0.5735558904428565
+        },
+        "prompt_v2": {
+            "answer": "\u2022 Embeddings are vectors (lists) of floating point numbers that represent the meaning or relatedness of texts, images, or information.\n\u2022 The distance between two embeddings measures their relatedness: small distances indicate high relatedness, large distances indicate low relatedness.\n\u2022 Embeddings are commonly used for:\n  - Search (ranking results by relevance)\n  - Clustering (grouping similar items)\n  - Recommendations (suggesting related items)\n  - Anomaly detection (identifying outliers)\n  - Diversity measurement (analyzing similarity distributions)\n  - Classification (assigning labels based on similarity)\n\u2022 Embeddings can also be used as feature encoders in machine learning models, improving performance when relevant inputs are free text or meaningful categorical variables.\n\u2022 Embeddings can be generated using models such as OpenAI's text-embedding-3-small and text-embedding-3-large, or Cohere's embed-v4.0 model. These models allow for trade-offs between performance and cost, and can be optimized for different input types or shortened in size without significant loss of meaning representation.[266][179][180][195][184]",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 7.437536499986891,
+            "similarity": 0.5882707193367156
+        }
+    },
+    {
+        "question": "What is function calling?",
+        "prompt_v1": {
+            "answer": "Function calling is a way to allow GPT to select relevant functions to call in order to ground its answer in user data. The developer provides descriptions of functions along with a user query, and GPT can respond with the correct function to call and the arguments to call it with. The developer then executes this function and passes the function\u2019s response, along with the original user\u2019s query, back to GPT so it can answer the query based on the provided data.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 4.4138478329987265,
+            "similarity": 0.5959686507003135
+        },
+        "prompt_v2": {
+            "answer": "Function calling is a method that allows GPT models to select and call relevant functions based on a user's query. The developer provides descriptions of available functions, and GPT determines which function to call and with what arguments. The developer then executes the function and returns its response, along with the original user query, so GPT can answer the query using the provided data. This process grounds GPT's answers in user data and enables more dynamic and accurate responses. Function calling can be set to different modes: 'none' (no function call), 'auto' (model decides), or specifying a particular function to call. 'Auto' is the default if functions are present, otherwise 'none' is the default. The final response to the user is based on the data returned from the function call. [OpenAI Documentation.pdf, 88][OpenAI Documentation.pdf, 89][OpenAI Documentation.pdf, 95]",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 8.302586000005249,
+            "similarity": 0.6601378520233694
+        }
+    },
+    {
+        "question": "What is prompt engineering?",
+        "prompt_v1": {
+            "answer": "Prompt engineering is the process of writing effective instructions for a model, such that it consistently generates content that meets your requirements. Because the content generated from a model is non-deterministic, prompting to get your desired output is a mix of art and science. However, you can apply techniques and best practices to get good results consistently.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 1.8027663330140058,
+            "similarity": 0.5154050316662867
+        },
+        "prompt_v2": {
+            "answer": "Prompt engineering is the process of writing effective instructions for a model so that it consistently generates content that meets your requirements. Because model outputs are non-deterministic, prompt engineering involves applying techniques and best practices to reliably achieve the desired results. It is considered a mix of art and science, requiring iteration and testing to optimize outcomes.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 2.671894833998522,
+            "similarity": 0.49052009280034964
+        }
+    },
+    {
+        "question": "What is a context window?",
+        "prompt_v1": {
+            "answer": "A context window refers to all the text a language model can reference when generating a response, including the response itself. It acts as the model's 'working memory' and is distinct from the data the model was trained on. The context window has a fixed capacity, defined in tokens, and includes both the conversation history and the current input and output. As the conversation progresses, each user message and assistant response accumulates within the context window, growing linearly until the limit is reached. Managing what is included in the context window is important, as accuracy and recall can degrade as the token count increases, a phenomenon known as context rot.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 5.0251676669868175,
+            "similarity": 0.670602354417069
+        },
+        "prompt_v2": {
+            "answer": "- A context window is the total amount of text a language model can reference when generating a response, including both the input and the model's own output.\n- It acts as the model's 'working memory' during a conversation or task, separate from the data it was originally trained on.\n- The context window is measured in tokens and has a fixed size limit, which varies by model (e.g., up to 1 million tokens for some models).\n- As conversations progress, each user message and assistant response accumulates within the context window, growing linearly until the limit is reached.\n- When the context window fills up, strategies like summarization or context editing are used to manage what information is retained.\n- More context isn't always better; as the token count grows, accuracy and recall can degrade, a phenomenon known as context rot.\n- Managing what is included in the context window is crucial for maintaining model performance.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 5.735987959022168,
+            "similarity": 0.6515114071815571
+        }
+    },
+    {
+        "question": "What is ToolNode?",
+        "prompt_v1": {
+            "answer": "In LangGraph workflows, tool execution is handled by ToolNode. See ToolNode.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 1.7097708750225138,
+            "similarity": 0.3155877231918976
+        },
+        "prompt_v2": {
+            "answer": "ToolNode is used in LangGraph workflows within LangChain to handle tool execution. It is responsible for executing tools as part of the workflow, as opposed to agents using tools via create_agent in standard LangChain usage.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 2.24192316699191,
+            "similarity": 0.34477367297569667
+        }
+    },
+    {
+        "question": "What is Cohere Rerank?",
+        "prompt_v1": {
+            "answer": "Cohere Rerank is an API endpoint powered by Rerank models that is used for semantic search. Given a query and a list of documents, Rerank indexes the documents from most to least semantically relevant to the query. It supports both text and structured data inputs and provides a response that ranks the documents according to their relevance. The Rerank models also support multiple languages, with different versions offering varying levels of multilingual support.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 3.7719919579976704,
+            "similarity": 0.9115953576178478
+        },
+        "prompt_v2": {
+            "answer": "- Cohere Rerank is an API endpoint powered by Rerank models for semantic search.\n- It takes a query and a list of documents, and indexes the documents from most to least semantically relevant to the query.\n- The API returns a response object that ranks the documents based on their relevance.\n- Rerank supports both plain text and structured data (recommended as YAML strings for best performance).\n- The Rerank models are multilingual, supporting over 100 languages, with different versions offering varying language support.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 4.65176637499826,
+            "similarity": 0.8601890618988589
+        }
+    },
+    {
+        "question": "Explain the stages of the RAG pipeline.",
+        "prompt_v1": {
+            "answer": "The RAG (Retrieval-Augmented Generation) pipeline consists of five key stages:\n\n1. Loading: This stage involves getting your data from its source (such as text files, PDFs, websites, databases, or APIs) into your workflow. Tools like LlamaHub provide connectors to facilitate this process.\n2. Indexing: Here, a data structure is created to allow for efficient querying of the data. For LLMs, this typically means creating vector embeddings (numerical representations of your data's meaning) and other metadata strategies to help find contextually relevant data.\n3. Storing: After indexing, the index and associated metadata are stored to avoid the need for re-indexing in the future.\n4. Querying: This stage involves using various strategies to query the indexed data, such as sub-queries, multi-step queries, and hybrid approaches. Retrievers and routers play a key role in efficiently retrieving relevant context from the index.\n5. Evaluation: The final stage is evaluating the effectiveness of your RAG pipeline. This involves measuring how accurate, faithful, and fast your responses to queries are, especially when comparing different strategies or after making changes.\n\nThese stages are fundamental to building applications that leverage RAG techniques for integrating your data with LLMs.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 4.998711041000206,
+            "similarity": 0.7346767478349059
+        },
+        "prompt_v2": {
+            "answer": "The stages of the RAG (Retrieval-Augmented Generation) pipeline are:\n\n- Loading: Getting your data from its source (e.g., text files, PDFs, databases, APIs) into your workflow. Tools like LlamaHub provide connectors for this purpose. Data is ingested as Documents and split into Nodes, which are atomic data units with metadata. [306][308]\n- Indexing: Creating a data structure (usually vector embeddings and metadata) that allows for efficient querying of the data. [306][308]\n- Storing: Saving your index and metadata to avoid re-indexing in the future. [307]\n- Querying: Using retrieval strategies to fetch relevant context from the index for a given query. This involves retrievers (to fetch data), routers (to select retrievers), and node postprocessors (to transform or filter results). [307][310]\n- Evaluation: Measuring the effectiveness, accuracy, and speed of your RAG pipeline to compare strategies or validate changes. [307]",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 5.47969758399995,
+            "similarity": 0.6810493318212876
+        }
+    },
+    {
+        "question": "Compare BM25 and vector search.",
+        "prompt_v1": {
+            "answer": "I don't know.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 6.762554790999275,
+            "similarity": 0.11535186037563262
+        },
+        "prompt_v2": {
+            "answer": "- Vector search uses embeddings (numerical representations of data) to find data that is numerically similar to the embedding of your query, typically using cosine similarity or Euclidean distance. This approach is effective for semantic search and is commonly implemented using a vector store or vector database. [309]\n- BM25 is not mentioned in the provided context, so a direct comparison with vector search cannot be made.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 2.050793458998669,
+            "similarity": 0.287063971016383
+        }
+    },
+    {
+        "question": "How do embeddings enable semantic search?",
+        "prompt_v1": {
+            "answer": "Embeddings enable semantic search by representing the meaning of texts as lists of numbers (vectors). By comparing these embeddings using a similarity function, we can calculate a similarity score to determine whether two pieces of information are about similar things. In semantic search, the search query and the documents are both converted into embeddings, and the similarity between the query embedding and each document embedding is computed. Documents with higher similarity scores are considered more relevant to the query, allowing for search results ranked by semantic relevance rather than just keyword matching.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 3.253838165983325,
+            "similarity": 0.5271963269530889
+        },
+        "prompt_v2": {
+            "answer": "Embeddings enable semantic search by:\n\n- Representing the meaning of texts as lists of numbers (vectors), capturing semantic information rather than just keywords [266].\n- Allowing similarity scores to be calculated between embeddings, so that semantically similar texts have high similarity scores, even if they use different words [266].\n- Optimizing embeddings for semantic search by using specific input types (e.g., 'search_query' for queries and 'search_document' for documents), which improves the relevance of search results [267].\n- Ranking search results by the relevance (similarity) of their embeddings to the query embedding, enabling retrieval of contextually related information [179].",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 4.322662499995204,
+            "similarity": 0.552520709599168
+        }
+    },
+    {
+        "question": "How does Cohere Rerank improve retrieval?",
+        "prompt_v1": {
+            "answer": "Cohere's Rerank improves retrieval by reordering a list of documents based on their semantic relevance to a given query. The Rerank API takes a query and a list of documents, then indexes the documents from most to least semantically relevant. This process ensures that the most relevant documents appear first in the results, enhancing the effectiveness of semantic search. Additionally, Cohere's Rerank models support multiple languages, further improving retrieval across diverse datasets.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 3.3718590420030523,
+            "similarity": 0.8959440302723072
+        },
+        "prompt_v2": {
+            "answer": "- Cohere's Rerank API indexes documents from most to least semantically relevant to a given query, improving the relevance of retrieved results.\n- It works with both plain text and structured data (recommended as YAML strings for best performance).\n- The Rerank models are multilingual, supporting over 100 languages, which broadens applicability and improves retrieval across languages.\n- By reordering documents based on semantic similarity, Rerank ensures that the most relevant information appears first in search results.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 5.777988957997877,
+            "similarity": 0.8454148164911097
+        }
+    },
+    {
+        "question": "How do retrievers work with vector stores?",
+        "prompt_v1": {
+            "answer": "Retrievers work with vector stores by efficiently retrieving relevant context from an index when given a query. The process involves converting the query into an embedding (a numerical representation), and then the vector store finds data that is numerically similar to the embedding of the query. The retriever defines the strategy for this retrieval, ensuring the relevancy and efficiency of the data returned. Additionally, routers can select which retriever to use, and node postprocessors can further transform, filter, or re-rank the retrieved results.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 2.7274124170071445,
+            "similarity": 0.7122920333145514
+        },
+        "prompt_v2": {
+            "answer": "- Retrievers are responsible for efficiently retrieving relevant context from an index (such as a vector store) when given a query.\n- When a query is made, it is converted into an embedding (a numerical representation).\n- The vector store then finds data that is numerically similar to the embedding of the query, returning the most relevant results.\n- Retrievers define the strategy for this retrieval process, impacting both the relevancy and efficiency of the results.\n- Additional components like routers can select which retriever to use, and node postprocessors can further filter or re-rank the retrieved results based on additional logic.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 3.1547044169856235,
+            "similarity": 0.7391486840181946
+        }
+    },
+    {
+        "question": "Compare documents and nodes in LlamaIndex.",
+        "prompt_v1": {
+            "answer": "In LlamaIndex, a Document is a container around any data source, such as a PDF, API output, or data retrieved from a database. A Node, on the other hand, is the atomic unit of data in LlamaIndex and represents a \"chunk\" of a source Document. Nodes have metadata that relate them to the document they are in and to other nodes. Essentially, Documents are the larger data containers, while Nodes are the smaller, chunked pieces of those Documents used for processing and retrieval.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 2.1925056249892805,
+            "similarity": 0.3092789936375431
+        },
+        "prompt_v2": {
+            "answer": "- A Document is a container around any data source, such as a PDF, API output, or database data.\n- A Node is the atomic unit of data in LlamaIndex and represents a 'chunk' of a source Document.\n- Nodes have metadata that relate them to the document they are in and to other nodes.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 1.8671594579936936,
+            "similarity": 0.295358643076192
+        }
+    },
+    {
+        "question": "How does function calling differ from prompt engineering?",
+        "prompt_v1": {
+            "answer": "Function calling and prompt engineering serve different purposes in the context of using OpenAI models. Function calling is a way to allow GPT models to select relevant functions to call in order to ground their answers in user data. The developer provides descriptions of functions along with a user query, and GPT can respond with the correct function to call and the arguments to use. This allows the model to interface with external systems and access data outside its training data, often using JSON schemas to define the functions and their parameters. In contrast, prompt engineering involves crafting the input prompts to guide the model's responses, often by building prompt templates or modules near the features they support, and passing generated instructions and input directly to the API. Prompt engineering is about shaping the model's behavior through input design, while function calling is about enabling the model to take actions or retrieve data by invoking external functions based on the user's query.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 4.826357832993381,
+            "similarity": 0.6215034647805956
+        },
+        "prompt_v2": {
+            "answer": "- Function calling allows GPT models to select and call external functions based on user queries, grounding answers in user data or external systems. The developer provides function descriptions, and the model responds with which function to call and the arguments to use. This enables integration with external actions and data sources. [OpenAI Documentation.pdf, 88][Function calling _ OpenAI API.html, 117]\n- Prompt engineering involves crafting prompts and instructions to guide model behavior and responses. It focuses on how to structure input to get desired outputs, often using schemas for dynamic values and integrating prompt builders near supported features. [Prompt engineering _ OpenAI API.html, 286]\n- In summary:\n  - Function calling connects the model to external functions and data, enabling action and integration.\n  - Prompt engineering is about designing effective prompts to influence model responses.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 4.506616540980758,
+            "similarity": 0.6619006205067337
+        }
+    },
+    {
+        "question": "How do context windows affect LLM performance?",
+        "prompt_v1": {
+            "answer": "Context windows affect LLM performance by defining the amount of text the model can reference when generating a response. A larger context window allows the model to handle more complex and lengthy prompts. However, as the token count grows, accuracy and recall degrade\u2014a phenomenon known as context rot. This means that curating what is included in the context is just as important as the size of the context window. Therefore, while a bigger context window can be beneficial, it does not automatically guarantee better performance, and careful management of the context is necessary to maintain accuracy and effectiveness.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 1.9459082090179436,
+            "similarity": 0.5913309722726515
+        },
+        "prompt_v2": {
+            "answer": "- The context window is the \"working memory\" of a language model, representing all the text it can reference when generating a response, including the response itself.\n- A larger context window allows the model to handle more complex and lengthy prompts.\n- However, as the token count grows, accuracy and recall degrade\u2014a phenomenon known as context rot.\n- This means that simply increasing the context window does not always improve performance; curating what is included in the context is important.\n- Claude achieves strong results on long-context retrieval benchmarks, but these gains depend on the quality of the context, not just its size.\n- As conversations progress, each user message and assistant response accumulates within the context window, causing linear growth in context usage.\n- When the context window limit is approached, strategies like server-side compaction and context editing are used to manage performance and maintain relevant information.\n- Effective token management and context engineering are crucial for maintaining LLM performance as the context window fills up.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 4.542742125020595,
+            "similarity": 0.627230390207257
+        }
+    },
+    {
+        "question": "Why is prompt engineering important?",
+        "prompt_v1": {
+            "answer": "Prompt engineering is important because it is the process of writing effective instructions for a model, ensuring that it consistently generates content that meets your requirements. Since the content generated from a model is non-deterministic, getting your desired output is a mix of art and science. Applying prompt engineering techniques and best practices helps you get good results consistently, making it crucial for building reliable and effective AI applications.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 1.6892864590045065,
+            "similarity": 0.5510490069438346
+        },
+        "prompt_v2": {
+            "answer": "Prompt engineering is important because:\n- It helps ensure that models consistently generate content that meets your requirements, despite the non-deterministic nature of model outputs [279].\n- Effective prompt engineering allows you to get good results consistently by applying specific techniques and best practices [279].\n- Different models and even different versions of the same model may require different prompting strategies to achieve optimal results [280].\n- Proper prompt engineering supports building robust applications by enabling consistent behavior, especially when pinning to specific model snapshots and using tests to monitor performance [280].",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 2.9713681660068687,
+            "similarity": 0.4822483493495704
+        }
+    },
+    {
+        "question": "How are tools executed in LangChain?",
+        "prompt_v1": {
+            "answer": "In LangChain, tools can be executed in several ways:\n\n1. Ordinary tools: These are defined with a function body and run on the server where your agent is hosted.\n2. Headless tools: These are schema-only tool definitions (name, description, args_schema) registered on the server, but their implementation is executed on the client (such as in the browser) after an interrupt/resume handshake. The server pauses execution and waits for the client to perform the action and resume the process.\n3. Server-side tool use: Some chat models have built-in tools (like web search or code interpreters) that are executed remotely by the model provider, so you don't need to define or host the tool logic yourself.\n\nLangChain also provides a collection of prebuilt tools and toolkits for common tasks, which can be directly integrated into your agents without writing custom code.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 5.321642958995653,
+            "similarity": 0.5483465837746768
+        },
+        "prompt_v2": {
+            "answer": "- Tools in LangChain can be executed in several ways:\n  - **Server-side tools**: The tool's function body runs on the server, or the model provider executes built-in tools remotely (e.g., web search, code interpreters) without you needing to define or host the logic yourself. These are integrated directly with the model and executed on the provider's infrastructure. [251]\n  - **Headless tools**: These are schema-only tool definitions (name, description, argument schema) registered on the server, but their implementation is executed on the client (such as in the browser) after an interrupt/resume handshake. The server pauses execution and waits for the client to perform the action and resume. [247][249][250]\n  - **Prebuilt tools**: LangChain provides a collection of ready-to-use tools and toolkits for common tasks, which can be directly integrated into agents. [250]",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 5.273993040987989,
+            "similarity": 0.5073662027735532
+        }
+    },
+    {
+        "question": "Summarize RAG in one sentence.",
+        "prompt_v1": {
+            "answer": "Retrieval-Augmented Generation (RAG) is a technique that enhances language models by incorporating your own data into their responses through a process of loading, indexing, querying, and evaluating relevant information.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 1.8463342080067378,
+            "similarity": 0.8445155204964003
+        },
+        "prompt_v2": {
+            "answer": "Retrieval-Augmented Generation (RAG) is a technique where your data is loaded, indexed, and queried to provide relevant context to a language model, enabling it to generate responses based on both its training and your specific data.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 2.7500010000076145,
+            "similarity": 0.8393690716780082
+        }
+    },
+    {
+        "question": "List the stages of RAG.",
+        "prompt_v1": {
+            "answer": "The stages of RAG are:\n1. Loading: Getting your data from its source into your workflow.\n2. Indexing: Creating a data structure (like vector embeddings) for querying the data.\n3. Storing: Saving your index and metadata to avoid re-indexing.\n4. Querying: Using strategies to retrieve relevant context from the index for a given query.\n5. Evaluation: Checking how effective your flow is by measuring accuracy, faithfulness, and speed of responses.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 2.6566702910058666,
+            "similarity": 0.5986049140971595
+        },
+        "prompt_v2": {
+            "answer": "The stages of RAG are:\n- Loading: Getting your data from its source into your workflow.\n- Indexing: Creating a data structure (often vector embeddings) for querying the data.\n- Storing: Saving your index and metadata to avoid re-indexing.\n- Querying: Using strategies to retrieve relevant context from the index for a given query.\n- Evaluation: Measuring the effectiveness, accuracy, and speed of your responses and strategies.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 2.996722750016488,
+            "similarity": 0.6083319075412128
+        }
+    },
+    {
+        "question": "Explain embeddings to a beginner.",
+        "prompt_v1": {
+            "answer": "Embeddings are a way to represent the meaning of texts, images, or information as a list of numbers (a vector). These numbers capture the essence or meaning of the input, so that similar pieces of information have similar embeddings. By comparing these vectors using a simple function, we can measure how similar two pieces of information are. Embeddings are commonly used for tasks like search (finding relevant results), clustering (grouping similar items), classification, and recommendations. For example, if two phrases have similar meanings, their embeddings will be close together, while unrelated phrases will have embeddings that are far apart.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 3.872273250017315,
+            "similarity": 0.5897184564481944
+        },
+        "prompt_v2": {
+            "answer": "\u2022 Embeddings are a way to represent the meaning of texts, images, or information as a list of numbers (vectors).\n\u2022 These numbers capture the relatedness or similarity between different pieces of information: similar items have similar embeddings, and unrelated items have very different embeddings.\n\u2022 The distance between two embedding vectors measures how related they are: small distances mean high similarity, large distances mean low similarity.\n\u2022 Embeddings are commonly used for tasks like search, clustering, classification, recommendations, and anomaly detection.\n\u2022 For example, in search, embeddings help rank results by how relevant they are to a query. In classification, they help assign labels to text based on similarity to known categories. In recommendations, they help suggest items similar to what a user likes. [266][179][180]",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 4.0034263340057805,
+            "similarity": 0.552599315834127
+        }
+    },
+    {
+        "question": "When should tools return objects instead of strings?",
+        "prompt_v1": {
+            "answer": "Tools should return objects instead of strings when they produce structured data that the model should inspect. Returning an object allows the model to read specific fields and reason over them. The object is serialized and sent back as tool output, which the model can then parse and use for further reasoning or actions. This is in contrast to returning a string, which is used for plain text results that the model simply reads and uses in its next response.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 1.859576124988962,
+            "similarity": 0.41906517818820066
+        },
+        "prompt_v2": {
+            "answer": "- Tools should return an object (e.g., a dict) when the tool produces structured data that the model should inspect or reason over, rather than just plain text for human reading.\n- Returning an object allows the model to read specific fields and reason over them, enabling more complex interactions than a simple string return.\n- The object is serialized and sent back as tool output, but does not directly update graph state unless further action is taken by the model or another tool.\n- Use object returns when structured, machine-readable results are needed rather than human-readable text only. [242]",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 2.513233083009254,
+            "similarity": 0.42470406124036403
+        }
+    },
+    {
+        "question": "What happens if no relevant context is retrieved?",
+        "prompt_v1": {
+            "answer": "I don't know.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 3.941002292005578,
+            "similarity": 0.11535186037563262
+        },
+        "prompt_v2": {
+            "answer": "- If no relevant context is retrieved, the model will not have additional context from your data to use in its response.\n- This means the model will rely solely on its pre-trained knowledge or may not be able to answer the query accurately, depending on the implementation.\n- The effectiveness of RAG depends on retrieving relevant context; without it, the benefits of RAG are not realized.\n- The documentation does not specify a default behavior for when no context is retrieved.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 4.5561458749871235,
+            "similarity": 0.536261114975539
+        }
+    },
+    {
+        "question": "Why would vector search fail?",
+        "prompt_v1": {
+            "answer": "I don't know.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 6.033397542021703,
+            "similarity": 0.07708513317901994
+        },
+        "prompt_v2": {
+            "answer": "Vector search can fail for several reasons, including:\n\n- Poor quality or incorrect embeddings: If the embeddings do not accurately represent the data, relevant results may not be retrieved. This can happen if the embedding model is not suitable for the data type or if there was an error during embedding generation.\n- Inadequate indexing: If the data is not properly indexed in the vector store, relevant vectors may not be found efficiently or at all. Proper indexing is crucial for fast and accurate retrieval [309].\n- Incorrect distance function: Using an inappropriate distance function can lead to poor retrieval results. However, for normalized embeddings, cosine similarity and Euclidean distance yield identical rankings [200].\n- Metadata or filtering issues: If metadata is not correctly stored or used during filtering, relevant results may be excluded [309].\n- Vector database limitations: Some vector databases may not support certain embedding types or may have limitations in handling large datasets efficiently [273].",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 4.577968917001272,
+            "similarity": 0.34822926736229987
+        }
+    },
+    {
+        "question": "When should additional context be added to prompts?",
+        "prompt_v1": {
+            "answer": "Additional context should be added to prompts when you want to give the model access to proprietary data or any other data outside the data set the model was trained on, or to constrain the model\u2019s response to a specific set of resources that you have determined will be most beneficial. Including additional context is useful for generating responses that require information not present in the model's original training data or when you want to guide the model to use specific information relevant to the task at hand.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 2.815715207980247,
+            "similarity": 0.4938211995006211
+        },
+        "prompt_v2": {
+            "answer": "Additional context should be added to prompts in the following situations:\n\n- When the model needs access to proprietary data or any data outside its training set.\n- To constrain the model\u2019s response to a specific set of resources you have determined will be most beneficial.\n- When you want the model to generate a response using information that is particularly relevant to the current request, such as private or specialized data.\n\nThis technique is often called retrieval-augmented generation (RAG), and context is usually best positioned near the end of your prompt. You can add context by querying a database or using file search tools to include relevant text in the prompt. Including examples of possible inputs and desired outputs is also a useful form of context for guiding the model\u2019s responses. \n\n- [Prompt engineering _ OpenAI API.html, Chunk ID: 297]\n- [Prompt engineering _ OpenAI API.html, Chunk ID: 290]",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 2.970061166997766,
+            "similarity": 0.5997761785067676
+        }
+    },
+    {
+        "question": "Explain retrievers in three bullet points.",
+        "prompt_v1": {
+            "answer": "- Retrievers are responsible for fetching the most relevant context given a user query or chat message.\n- They can be built on top of indexes or defined independently, and are key building blocks in query engines and chat engines for retrieving relevant context.\n- You can select and configure retrievers based on the index and retrieval mode, and further customize them using constructor parameters or a low-level composition API.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 2.7272262500191573,
+            "similarity": 0.8562333876847226
+        },
+        "prompt_v2": {
+            "answer": "- Retrievers are responsible for fetching the most relevant context given a user query or chat message, serving as a key building block in query engines and chat engines for retrieving relevant information. [221]\n- Retrievers can be built on top of indexes or defined independently, and you can select different retriever classes or modes depending on your needs. [221][222]\n- Retrievers can be configured with various parameters, and there are both high-level and low-level APIs available for more granular control. [222]",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 3.6092057499918155,
+            "similarity": 0.8432226402593012
+        }
+    },
+    {
+        "question": "Compare ToolNode and create_agent.",
+        "prompt_v1": {
+            "answer": "ToolNode and create_agent serve different roles in LangChain workflows:\n\n- ToolNode is used in LangGraph workflows to handle tool execution. It is specifically responsible for executing tools within the graph-based workflow.\n\n- create_agent is a minimal, highly configurable harness for creating agents. An agent is a model that calls tools in a loop until a task is complete. The harness includes the model, prompt, tools, and any middleware that shapes behavior. create_agent can be used with various models and allows for direct configuration of the model, tools, and system prompt.\n\nIn summary, ToolNode is focused on tool execution within LangGraph, while create_agent is a broader harness for building agents that can use tools and manage the overall workflow.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 4.303205834003165,
+            "similarity": 0.38201826890917867
+        },
+        "prompt_v2": {
+            "answer": "- ToolNode is used in LangGraph workflows to handle tool execution.\n- create_agent is a minimal, highly configurable harness in LangChain for creating agents that use models and tools in a loop until a task is complete.\n- create_agent allows you to specify the model, tools, prompts, and middleware, and is used to compose agents for various providers (OpenAI, Anthropic, Google, etc.).\n- ToolNode specifically manages the execution of tools within a LangGraph workflow, while create_agent is a broader harness for agent orchestration and configuration.\n- Tool execution error handling in LangChain is configured through middleware, and for LangGraph, ToolNode is responsible for this aspect.\n- In summary: ToolNode = tool execution in LangGraph; create_agent = agent harness in LangChain for model/tool orchestration and configuration.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 4.871779042005073,
+            "similarity": 0.39753349524238873
+        }
+    },
+    {
+        "question": "What metadata is stored with chunks?",
+        "prompt_v1": {
+            "answer": "Indexes can store a variety of metadata about your data. This metadata can include information such as author, version, environment requirements, and any custom key-value pairs relevant to the data. For example, metadata might include fields like author, version, or server information. The specific metadata stored depends on the use case and requirements.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 4.0662720410036854,
+            "similarity": 0.11015294736445792
+        },
+        "prompt_v2": {
+            "answer": "- Indexes can store a variety of metadata about your data when you ingest and index it using LlamaIndex.\n- This metadata can include information that helps with retrieval and organization of the data.\n- The specific types of metadata are not detailed in the provided context, but it is stated that indexes can store various metadata about your data.",
+            "model": "gpt-4.1",
+            "fallback": false,
+            "latency": 2.2004127080144826,
+            "similarity": 0.08652860357564476
+        }
+    }
+]

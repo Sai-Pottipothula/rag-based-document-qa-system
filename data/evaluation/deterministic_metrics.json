@@ -1,0 +1,8 @@
+{
+    "questions": 50,
+    "answer_present": 50,
+    "citation_present": 30,
+    "valid_citation_format": 50,
+    "minimum_answer_length": 30,
+    "overall_pass_rate": 0.8
+}

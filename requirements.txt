@@ -44,3 +44,7 @@ tqdm
 
 # Optional Logging
 rich
+
+presidio-*
+spacy
+matplotlib

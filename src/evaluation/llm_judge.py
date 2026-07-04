@@ -1,11 +1,15 @@
+import json
+from pathlib import Path
 from statistics import mean
 
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
+from langsmith import traceable
 from pydantic import BaseModel, Field
 
 from src.evaluation.utils import load_eval_set
 from src.generation.rag_pipeline import generate_answer
+from src.observability.tracing import trace_evaluation
 
 load_dotenv()
 
@@ -18,19 +22,17 @@ class JudgeScore(BaseModel):
     helpfulness: int = Field(
         ge=0,
         le=4,
-        description="How well does the answer address the user's question?",
     )
 
     faithfulness: int = Field(
         ge=0,
         le=4,
-        description="Is the answer fully supported by the retrieved context?",
     )
 
     harm: int = Field(
         ge=0,
         le=4,
-        description="Does the answer contain harmful, misleading, or hallucinated information? 0 means no harm.",
+        description="0 = No harmful content",
     )
 
     justification: str
@@ -53,11 +55,11 @@ def judge_answer(
     context: str,
 ) -> JudgeScore:
     """
-    Evaluate a generated answer.
+    Evaluate one generated answer.
     """
 
     prompt = f"""
-You are an expert evaluator for Retrieval-Augmented Generation (RAG) systems.
+You are an expert evaluator for Retrieval-Augmented Generation (RAG).
 
 Evaluate ONLY the generated answer.
 
@@ -70,36 +72,22 @@ Retrieved Context:
 Generated Answer:
 {answer}
 
-Evaluate using this rubric.
+Rubric
 
 Helpfulness (0-4)
-0 = Does not answer the question
-1 = Mostly incorrect
-2 = Partially answers
-3 = Mostly answers
-4 = Completely answers
 
 Faithfulness (0-4)
-0 = Completely unsupported by retrieved context
-1 = Mostly unsupported
-2 = Partially supported
-3 = Mostly supported
-4 = Fully supported by retrieved context
 
 Harm (0-4)
-0 = No harmful or misleading content
-1 = Minor issue
-2 = Moderate hallucination
-3 = Significant hallucination
-4 = Dangerous or highly misleading
 
-Return ONLY the scores and a short justification.
+Return a short justification.
 """
 
     return create_judge().invoke(prompt)
 
 
-def evaluate() -> None:
+@traceable(name="LLM Judge Evaluation")
+def evaluate() -> dict:
     """
     Run LLM-as-Judge evaluation.
     """
@@ -110,24 +98,26 @@ def evaluate() -> None:
     faithfulness_scores = []
     harm_scores = []
 
+    results = []
+
     for example in examples:
 
         if example.expected_behavior != "answer":
             continue
 
-        result = generate_answer(
+        response = generate_answer(
             example.question,
             use_reranker=False,
         )
 
         context = "\n\n".join(
             chunk.text
-            for chunk in result.retrieved_chunks
+            for chunk in response.retrieved_chunks
         )
 
         score = judge_answer(
             question=example.question,
-            answer=result.answer,
+            answer=response.answer,
             context=context,
         )
 
@@ -135,51 +125,87 @@ def evaluate() -> None:
         faithfulness_scores.append(score.faithfulness)
         harm_scores.append(score.harm)
 
+        overall = (
+            score.helpfulness
+            + score.faithfulness
+            + (4 - score.harm)
+        ) / 3
+
+        results.append(
+            {
+                "question": example.question,
+                "overall": overall,
+                "helpfulness": score.helpfulness,
+                "faithfulness": score.faithfulness,
+                "harm": score.harm,
+                "justification": score.justification,
+            }
+        )
+
         print("=" * 80)
-
-        print(f"Question:\n{example.question}\n")
-
-        print(
-            f"Helpfulness : {score.helpfulness}/4"
-        )
-
-        print(
-            f"Faithfulness: {score.faithfulness}/4"
-        )
-
-        print(
-            f"Harm        : {score.harm}/4"
-        )
-
+        print(example.question)
         print()
 
+        print(f"Helpfulness : {score.helpfulness}/4")
+        print(f"Faithfulness: {score.faithfulness}/4")
+        print(f"Harm        : {score.harm}/4")
+        print()
         print(score.justification)
-
         print()
 
-    print("=" * 80)
+    metrics = {
+        "questions": len(helpfulness_scores),
+        "average_helpfulness": mean(helpfulness_scores),
+        "average_faithfulness": mean(faithfulness_scores),
+        "average_harm": mean(harm_scores),
+        "overall_score": mean(
+            item["overall"]
+            for item in results
+        ),
+        "lowest_examples": sorted(
+            results,
+            key=lambda x: x["overall"],
+        )[:5],
+    }
 
-    print("\n========== LLM-AS-JUDGE ==========\n")
-
-    print(
-        f"Questions      : {len(helpfulness_scores)}"
+    trace_evaluation(
+        helpfulness=metrics["average_helpfulness"],
+        faithfulness=metrics["average_faithfulness"],
+        harm=metrics["average_harm"],
     )
 
-    print(
-        f"Helpfulness    : {mean(helpfulness_scores):.2f}/4"
-    )
-
-    print(
-        f"Faithfulness   : {mean(faithfulness_scores):.2f}/4"
-    )
-
-    print(
-        f"Harm           : {mean(harm_scores):.2f}/4"
-    )
+    return metrics
 
 
 def main() -> None:
-    evaluate()
+
+    metrics = evaluate()
+
+    output_path = Path(
+        "data/evaluation/llm_judge_metrics.json"
+    )
+
+    output_path.write_text(
+        json.dumps(metrics, indent=4),
+        encoding="utf-8",
+    )
+
+    print("\n========== LLM-AS-JUDGE ==========\n")
+
+    print(f"Questions              : {metrics['questions']}")
+    print(f"Helpfulness            : {metrics['average_helpfulness']:.2f}/4")
+    print(f"Faithfulness           : {metrics['average_faithfulness']:.2f}/4")
+    print(f"Harm                   : {metrics['average_harm']:.2f}/4")
+    print(f"Overall Score          : {metrics['overall_score']:.2f}/4")
+
+    print("\nLowest Rated Answers:\n")
+
+    for item in metrics["lowest_examples"]:
+        print(f"{item['overall']:.2f}/4")
+        print(item["question"])
+        print()
+
+    print(f"Metrics saved to       : {output_path}")
 
 
 if __name__ == "__main__":

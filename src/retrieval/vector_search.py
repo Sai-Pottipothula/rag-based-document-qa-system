@@ -1,10 +1,13 @@
+import time
+
 from dotenv import load_dotenv
 from langchain_openai import OpenAIEmbeddings
+from langsmith import traceable
 from qdrant_client import QdrantClient
+
 from src.models.retrieval_response import RetrievalResponse
 from src.models.retrieved_chunk import RetrievedChunk
 from src.storage.load_qdrant import COLLECTION_NAME
-import time
 
 load_dotenv()
 
@@ -26,6 +29,15 @@ def create_client() -> QdrantClient:
     )
 
 
+@traceable(
+    name="Vector Search",
+    metadata={
+        "stage": "retrieval",
+        "retriever": "vector",
+        "embedding_model": "text-embedding-3-large",
+        "vector_db": "Qdrant",
+    },
+)
 def vector_search(
     query: str,
     limit: int = 10,
@@ -69,6 +81,8 @@ def vector_search(
         retrieval_method="vector",
         total_candidates=len(retrieved_chunks),
         execution_time=elapsed_time,
+        bm25_candidates=0,
+        vector_candidates=len(retrieved_chunks),
     )
 
 
